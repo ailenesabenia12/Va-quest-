@@ -1,59 +1,152 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lovemae VA Quest 20 Days</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>VA Quest - Complete with Tools</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+body{background:#f8f7ff;padding-bottom:90px;color:#1f2937}
+.header{background:linear-gradient(135deg,#6d28d9,#8b5cf6);color:white;padding:14px;position:sticky;top:0;z-index:20}
+.progress{height:5px;background:rgba(255,255,255,0.3);border-radius:10px;margin-top:8px;overflow:hidden}
+.progress-bar{height:100%;background:white;width:5%;transition:0.5s}
+.card{background:white;margin:12px;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000;margin:10px 0}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.task-box{background:#f5f3ff;border:2px dashed #a78bfa;border-radius:12px;padding:12px;margin:10px 0}
+.email{display:flex;gap:10px;align-items:center;border:2px solid #e5e7eb;padding:10px;border-radius:12px;margin:6px 0;background:white}
+.email.selected{border-color:#6d28d9;background:#ede9fe}
+.email.done{border-color:#10b981;background:#ecfdf5;opacity:0.6}
+.label-btn{flex:1;padding:12px;border-radius:12px;border:2px solid;text-align:center;font-weight:800;font-size:11px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:800;background:#6d28d9;color:white;margin-top:10px}
+.btn:disabled{background:#e5e7eb;color:#9ca3af}
+.btn-green{background:#10b981}
+.quiz-opt{border:2px solid #e5e7eb;padding:12px;border-radius:12px;margin:8px 0;background:white;font-size:13px}
+.quiz-opt.correct{border-color:#10b981;background:#ecfdf5}
+.quiz-opt.wrong{border-color:#ef4444;background:#fef2f2}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:8px 0 18px;border-top:1px solid #e5e7eb;z-index:20}
+.nav{color:#9ca3af;font-size:10px;text-align:center;flex:1}
+.nav.active{color:#6d28d9}
+.page{display:none}.page.active{display:block}
+.chip{padding:6px 12px;border-radius:20px;border:1px solid #e5e7eb;background:white;font-size:11px;display:inline-block;margin:3px}
+.chip.active{background:#1f2937;color:white}
+.lesson{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px;margin:8px 0;font-size:12px;line-height:1.5}
+.doc{border:1px solid #d1d5db;border-radius:8px;padding:10px;min-height:80px;background:white;font-size:13px}
+.cal{display:grid;grid-template-columns:50px 1fr;gap:1px;background:#e5e7eb;border-radius:10px;overflow:hidden;margin-top:8px}
+.t{background:white;padding:10px;font-size:11px}
+.s{background:white;min-height:42px;padding:4px}
+.ev{background:#ede9fe;color:#5b21b6;border-left:4px solid #6d28d9;padding:6px;border-radius:6px;font-size:11px;font-weight:700}
+.tool-item{border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin:8px 0;background:white;display:flex;justify-content:space-between;align-items:center}
+.input{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;margin:6px 0}
+</style>
 </head>
-<body class="bg-[#FFF9E5] max-w-md mx-auto min-h-screen pb-20 font-sans">
-<div class="bg-[#1E293B] text-white p-5 rounded-b-[30px]">
-<p class="font-black text-sm">LOVEMAE VA QUEST • 20 DAYS REAL WORK</p>
-<div class="flex justify-between mt-2 text-xs"><span id="dayTxt">Day 4/20</span><span id="pct">20%</span></div>
-<div class="w-full bg-white/20 h-1.5 rounded-full mt-1"><div id="bar" class="bg-yellow-400 h-1.5 rounded-full" style="width:20%"></div></div>
+<body>
+<div class="header">
+<div style="display:flex;justify-content:space-between"><div><div style="font-weight:900">VA QUEST</div><div style="font-size:10px;opacity:0.9">Day 1 + Courses + Tools</div></div><span id="dayBadge" style="background:white;color:#6d28d9;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:800">DAY 1/20</span></div>
+<div class="progress"><div class="progress-bar" id="progBar"></div></div>
 </div>
-<div class="flex bg-white mx-4 mt-3 rounded-full p-1 text-[10px] font-bold justify-between shadow">
-<button onclick="tab('p')" id="tp" class="bg-yellow-400 rounded-full px-4 py-2">Program</button>
-<button onclick="tab('c')" id="tc" class="px-4 py-2">Course</button>
-<button onclick="tab('b')" id="tb" class="px-4 py-2">Badge</button>
+
+<!-- PROGRAM -->
+<div id="page-program" class="page active">
+<div class="card">
+<h3>📧 Day 1: Inbox Zero Hero</h3>
+<div class="video-wrap"><iframe src="https://www.youtube.com/embed/9zJk1u3fP8g" allowfullscreen></iframe></div>
+<div id="s1"><div class="lesson"><b>After video:</b> Label 3 emails!</div><div id="inbox"></div><div style="display:flex;gap:6px;margin-top:8px"><div class="label-btn" style="background:#dbeafe;border-color:#3b82f6;color:#1e40af" onclick="labelNow('work')">📁 WORK</div><div class="label-btn" style="background:#ede9fe;border-color:#8b5cf6;color:#5b21b6" onclick="labelNow('meeting')">📅 MEETING</div><div class="label-btn" style="background:#fee2e2;border-color:#ef4444;color:#991b1b" onclick="labelNow('spam')">🚫 SPAM</div></div><p id="s1t" style="font-size:11px;text-align:center;margin-top:6px;color:#6b7280">Tap email first!</p></div>
+<div id="s2" style="display:none"><div style="font-weight:800">STEP 2: Reply</div><textarea id="reply" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid #d1d5db;height:70px" placeholder="Type reply..."></textarea><button class="btn" onclick="checkReply()">Send →</button></div>
+<div id="s3" style="display:none"><div style="font-weight:800">STEP 3: Google Doc</div><div class="doc" contenteditable="true" id="doc">📄 Agenda: 1. Performance 2. Next Plan 3. Q&A</div><button class="btn" onclick="checkDoc()">Save →</button></div>
+<div id="s4" style="display:none"><div style="font-weight:800">STEP 4: Calendar</div><div class="cal"><div class="t">2PM</div><div class="s" onclick="addCal(this)"><span style="font-size:11px;color:#9ca3af">Tap to add</span></div></div><button class="btn" id="calBtn" disabled onclick="finishDay()">Complete Day 1 →</button></div>
+<div id="done1" style="display:none;text-align:center;padding:20px"><div style="font-size:40px">🎉</div><h3>Day 1 Done!</h3><button class="btn btn-green" onclick="showPage('tools',document.querySelectorAll('.nav')[2])">Go to Tools →</button></div>
 </div>
-<div id="p" class="p-4"></div>
-<div id="c" class="p-4 hidden"></div>
-<div id="b" class="p-4 hidden"><div class="bg-white rounded-2xl p-6 text-center shadow"><h1 class="font-black text-3xl">🏆 Certified VA!</h1><p id="bTxt" class="mt-2 text-sm">Day 4/20 - Lovemae</p><p class="text-xs mt-2">I built a real VA training simulator</p></div></div>
+</div>
+
+<!-- COURSE -->
+<div id="page-course" class="page">
+<div class="card"><h3>🎓 Course Library - With Video</h3><div style="margin:8px 0"><span class="chip active" onclick="filterCourse('all',this)">All</span><span class="chip" onclick="filterCourse('email',this)">Email</span><span class="chip" onclick="filterCourse('calendar',this)">Calendar</span><span class="chip" onclick="filterCourse('drive',this)">Drive</span></div><div id="courseList"></div></div>
+<div class="card" id="lessonBox" style="display:none"></div>
+</div>
+
+<!-- TOOLS - REAL USABLE -->
+<div id="page-tools" class="page">
+<div class="card">
+<h3>🛠️ VA Tools - San Gagamitin</h3>
+<p style="font-size:11px;color:#6b7280">Tap tool para gamitin - Real na magagamit mo pag may client ka na!</p>
+
+<div class="tool-item" onclick="openTool('rate')"><div><div style="font-weight:800">💰 Rate Calculator</div><div style="font-size:11px;color:#6b7280">Compute mo rate per hour / month</div></div><span>→</span></div>
+
+<div class="tool-item" onclick="openTool('invoice')"><div><div style="font-weight:800">🧾 Invoice Generator</div><div style="font-size:11px;color:#6b7280">Gawa ng invoice pag sisingil kay client</div></div><span>→</span></div>
+
+<div class="tool-item" onclick="openTool('cover')"><div><div style="font-weight:800">📄 Cover Letter Template</div><div style="font-size:11px;color:#6b7280">Pang-apply sa Upwork / OLJ</div></div><span>→</span></div>
+
+<div class="tool-item" onclick="openTool('jobs')"><div><div style="font-weight:800">💼 Job Boards</div><div style="font-size:11px;color:#6b7280">San maghanap ng client</div></div><span>→</span></div>
+
+<div class="tool-item" onclick="openTool('portfolio')"><div><div style="font-weight:800">🎨 Portfolio Templates</div><div style="font-size:11px;color:#6b7280">Canva Resume & Website</div></div><span>→</span></div>
+</div>
+
+<div class="card" id="toolView" style="display:none"></div>
+</div>
+
+<!-- BADGE -->
+<div id="page-badge" class="page">
+<div class="card" style="text-align:center"><h3>🏅 Badge</h3><p style="font-size:11px;color:#6b7280">Day 1 of 20 - In Progress</p><div style="height:6px;background:#e5e7eb;border-radius:10px;margin:12px 0"><div style="height:100%;background:#6d28d9;width:5%;border-radius:10px"></div></div><button class="btn" onclick="showPage('program',document.querySelectorAll('.nav')[0])">Continue Day 1</button></div>
+</div>
+
+<div class="bottom-nav">
+<div class="nav active" onclick="showPage('program',this)"><div style="font-size:18px">📚</div>Program</div>
+<div class="nav" onclick="showPage('course',this)"><div style="font-size:18px">🎓</div>Course</div>
+<div class="nav" onclick="showPage('tools',this)"><div style="font-size:18px">🛠️</div>Tools</div>
+<div class="nav" onclick="showPage('badge',this)"><div style="font-size:18px">🏅</div>Badge</div>
+</div>
+
 <script>
-let cur=parseInt(localStorage.getItem('day')||'4');
-const DATA={
- email:{title:"Email Management", how:"REAL VA FLOW: 1) Receive email 2) LABEL: Work=invoice, Meeting=client wants meet, Spam=lotto 3) Archive spam 4) Reply with template 5) If meeting → add to Calendar + create Google Doc agenda. DRAG MO SA BABA!"},
- cal:{title:"Google Calendar & Docs", how:"Client: 'Meet tomorrow 2PM?' → 1) Open Google Calendar 2) Click Nov 15 3) Title: Client Call - Brand 2PM 4) Add Meet link: meet.google.com/xxx 5) Invite client 6) Create Google Doc agenda and attach."},
- drive:{title:"Google Drive Organizer", how:"Pro Structure: /Client_Name/ → 01_Invoices/ 02_ProductPhotos/ 03_MeetingNotes.docx → Share folder with Edit to client. I-organize mo sa baba!"}
-};
-function tab(x){['p','c','b'].forEach(y=>{document.getElementById(y).classList.add('hidden');document.getElementById('t'+y).classList.remove('bg-yellow-400')});document.getElementById(x).classList.remove('hidden');document.getElementById('t'+x).classList.add('bg-yellow-400');if(x==='p')renderP();if(x==='c')renderC();}
-function renderP(){
- let type=cur<=8?'email':cur<=13?'cal':'drive'; let d=DATA[type];
- let h=`<p class="text-[10px] text-teal-700 tracking-widest font-bold">DAY ${String(cur).padStart(2,'0')} / 20 • ${d.title.toUpperCase()}</p><h1 class="font-black text-2xl mt-1">${type==='email'?'Inbox Zero Hero!':type==='cal'?'On-Time VA!':'Organized VA!'}</h1><p class="text-xs mt-2 bg-white p-3 rounded-xl shadow">${d.how}</p><div class="bg-white rounded-2xl p-4 mt-4 shadow">`;
- if(type==='email'){
-  let ems=[{f:"client@brand.com",s:"Meeting tomorrow 2PM? Need agenda",t:"meeting"},{f:"supplier@shopee.com",s:"Invoice #123 Due Today - Shopee",t:"work"},{f:"win@lotto.com",s:"WIN $1000!!! Click now",t:"spam"}].sort(()=>Math.random()-0.5); window.ems=ems;
-  h+=`<p class="font-bold text-xs">👇 REAL TASK: Drag email sa tamang label!</p><div class="mt-2 space-y-2">${ems.map((e,i)=>`<div draggable="true" ondragstart="event.dataTransfer.setData('i',${i})" id="e${i}" class="border p-2 rounded-xl text-xs bg-yellow-50 cursor-move"><b>${e.f}</b><br>${e.s}</div>`).join('')}</div><div class="grid grid-cols-3 gap-2 mt-3">${['work','meeting','spam'].map(l=>`<div ondrop="dropE(event,'${l}')" ondragover="event.preventDefault()" class="border-2 border-dashed rounded-xl p-2 text-center min-h-[60px]"><b class="text-[8px]">${l.toUpperCase()}</b><div id="${l}"></div></div>`).join('')}</div><p id="r" class="text-center font-bold text-xs mt-2"></p>`;
- }else if(type==='cal'){
-  h+=`<p class="font-bold text-xs">📅 REAL TASK: Click date + type title + Meet link</p><div class="grid grid-cols-7 gap-1 mt-2 text-[10px]">${Array.from({length:30},(_,i)=>`<div onclick="window.sel=${i+1};document.querySelectorAll('.d').forEach(x=>x.classList.remove('bg-yellow-400'));this.classList.add('bg-yellow-400')" class="d border rounded-lg p-2 text-center cursor-pointer">${i+1}</div>`).join('')}</div><input id="mt" placeholder="Ex: Client Call 2PM - meet.google.com/abc" class="w-full border rounded-full px-3 py-2 mt-3 text-xs"><button onclick="saveCal()" class="w-full bg-black text-white rounded-full py-2 mt-2 text-xs font-bold">Save → NEXT DAY</button><p id="r" class="text-center font-bold text-xs mt-2"></p>`;
- }else{ h+=`<p class="font-bold text-xs">📁 REAL TASK: I-move lahat sa Client folder</p>${["Product_Photo.jpg","Invoice_Oct.pdf","Meeting_Notes.docx"].map(f=>`<div class="border p-2 rounded-full text-xs mt-2 flex justify-between items-center"><span>${f}</span><button onclick="this.parentElement.remove();checkD()" class="bg-black text-white px-3 py-1 rounded-full text-[10px]">Move</button></div>`).join('')}<p id="r" class="text-center font-bold text-xs mt-3"></p>`;}
- h+=`</div>`; document.getElementById('p').innerHTML=h; document.getElementById('dayTxt').innerText=`Day ${cur}/20`; document.getElementById('bTxt').innerText=`Day ${cur}/20 Completed - Lovemae Delacruz`; document.getElementById('pct').innerText=Math.round(cur/20*100)+'%'; document.getElementById('bar').style.width=cur/20*100+'%';
+let sel=null,done=0;
+const emails=[{id:'sup',from:'supplier@shopee.com',sub:'Invoice #1023 Due',correct:'work'},{id:'cli',from:'client@brand.com',sub:'Meeting Request 2PM',correct:'meeting'},{id:'spa',from:'win@lotto.com',sub:'YOU WON $1000!!!',correct:'spam'}];
+function renderInbox(){let h='';emails.forEach(e=>{h+=`<div class="email" id="e-${e.id}" onclick="selEmail('${e.id}')"><div id="c-${e.id}" style="width:30px;height:30px;border-radius:50%;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center">•</div><div><div style="font-weight:700;font-size:12px">${e.from}</div><div style="font-size:11px;color:#6b7280">${e.sub}</div></div></div>`});document.getElementById('inbox').innerHTML=h;}
+function selEmail(id){document.querySelectorAll('.email').forEach(e=>e.classList.remove('selected'));document.getElementById('e-'+id).classList.add('selected');sel=emails.find(x=>x.id===id)}
+function labelNow(l){if(!sel)return;if(sel.correct===l){document.getElementById('e-'+sel.id).classList.add('done');document.getElementById('c-'+sel.id).innerHTML='✓';document.getElementById('c-'+sel.id).style.background='#10b981';document.getElementById('c-'+sel.id).style.color='white';done++;sel=null;if(done===3){document.getElementById('s1').style.display='none';document.getElementById('s2').style.display='block';document.getElementById('progBar').style.width='30%'}}}
+function checkReply(){document.getElementById('s2').style.display='none';document.getElementById('s3').style.display='block';document.getElementById('progBar').style.width='60%'}
+function checkDoc(){document.getElementById('s3').style.display='none';document.getElementById('s4').style.display='block';document.getElementById('progBar').style.width='80%'}
+function addCal(el){el.innerHTML='<div class="ev">📅 Campaign Review 2PM</div>';document.getElementById('calBtn').disabled=false}
+function finishDay(){document.getElementById('s4').style.display='none';document.getElementById('done1').style.display='block';document.getElementById('progBar').style.width='100%'}
+
+const courses=[
+{cat:'email',title:'Email Management - Real Work',icon:'📧',video:'https://www.youtube.com/embed/9zJk1u3fP8g',content:`<div id="q1"></div>`},
+{cat:'calendar',title:'Google Calendar - Arrange Meeting',icon:'📅',video:'https://www.youtube.com/embed/huagFs1O1_I',content:`<div id="q2"></div>`},
+{cat:'drive',title:'Google Drive & Docs',icon:'📁',video:'https://www.youtube.com/embed/-r0N5a8Jhe0g',content:`<div id="q3"></div>`}
+];
+function renderCourses(f='all'){let h='';courses.forEach((c,i)=>{if(f!=='all'&&c.cat!==f)return;h+=`<div style="border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin:8px 0" onclick="openCourse(${i})"><div style="display:flex;gap:10px"><div style="font-size:22px">${c.icon}</div><div><div style="font-weight:800;font-size:13px">${c.title}</div><div style="font-size:11px;color:#6b7280">▶️ Video + Task + Quiz</div></div></div></div>`});document.getElementById('courseList').innerHTML=h;}
+function openCourse(i){const c=courses[i];const box=document.getElementById('lessonBox');box.style.display='block';box.innerHTML=`<button onclick="this.parentElement.style.display='none'" style="float:right;border:none;background:#f3f4f6;padding:6px 12px;border-radius:20px">✕</button><h3>${c.icon} ${c.title}</h3><div class="video-wrap"><iframe src="${c.video}" allowfullscreen></iframe></div>${c.content}`;box.scrollIntoView({behavior:'smooth'});if(i===0)renderQ('q1',[{q:'Saan i-label ang invoice?',opts:['Spam','WORK','Meeting'],ans:1},{q:'Job offer saan?',opts:['Spam','WORK - opportunity','Trash'],ans:1}]);if(i===1)renderQ('q2',[{q:'Unang step sa meeting?',opts:['Gawa invite','Check availability','Send meme'],ans:1}]);if(i===2)renderQ('q3',[{q:'Saan ilagay invoice?',opts:['Kalat','/02-Invoices','Trash'],ans:1}]);}
+function renderQ(id,qs){const el=document.getElementById(id);let h='<h5>🧠 Quiz - Hindi puro A!</h5>';qs.forEach((q,qi)=>{h+=`<div style="font-weight:700;font-size:12px;margin-top:8px">${qi+1}. ${q.q}</div>`;q.opts.forEach((o,oi)=>{h+=`<div class="quiz-opt" onclick="checkQ(this,${oi===q.ans},'${id}${qi}')">${String.fromCharCode(65+oi)}. ${o}</div>`});h+=`<div id="${id}${qi}" style="font-size:11px"></div>`});el.innerHTML=h;}
+function checkQ(el,ok,fid){el.parentElement.querySelectorAll('.quiz-opt').forEach(e=>e.style.pointerEvents='none');if(ok){el.classList.add('correct');document.getElementById(fid).innerHTML='✅ Tama!'}else{el.classList.add('wrong');document.getElementById(fid).innerHTML='❌ Mali'}}
+
+// TOOLS REAL
+function openTool(t){
+ const v=document.getElementById('toolView'); v.style.display='block';
+ if(t==='rate'){ v.innerHTML=`<h3>💰 Rate Calculator - San gagamitin?</h3><p style="font-size:12px;color:#6b7280">Gamitin pag nagtanong client: Magkano rate mo?</p><div style="margin-top:10px"><label style="font-size:12px">Hours per week:</label><input class="input" id="hrs" type="number" value="20"><label style="font-size:12px">Rate per hour ($):</label><input class="input" id="rate" type="number" value="5"><button class="btn" onclick="calcRate()">Calculate</button><div id="rateRes" style="margin-top:10px;padding:10px;background:#f5f3ff;border-radius:8px;font-weight:700"></div><div class="lesson" style="margin-top:10px">💡 Beginner VA sa PH: $3-$6/hr, Intermediate $7-$12/hr. Gamitin sa Upwork proposal!</div></div>`; }
+ if(t==='invoice'){ v.innerHTML=`<h3>🧾 Invoice Generator</h3><p style="font-size:12px;color:#6b7280">San gagamitin? Pag sisingil ka kay client every month!</p><input class="input" placeholder="Client Name: Brand X"><input class="input" placeholder="Work: Email Management + Calendar"><input class="input" placeholder="Amount: $200"><button class="btn" onclick="alert('✅ Invoice Created! Save as PDF at send kay client! Real VA task!')">Generate Invoice →</button><div class="lesson">Real VA: Send invoice every 1st & 15th of month via email + Google Drive link</div>`; }
+ if(t==='cover'){ v.innerHTML=`<h3>📄 Cover Letter Template - San gagamitin?</h3><p style="font-size:12px;color:#6b7280">Gamitin pag mag-apply sa Upwork / OnlineJobs.ph</p><div class="doc" contenteditable="true">Hi [Client Name]!
+
+I saw your job post for [VA Task - Email Management]. I can help you with:
+
+✓ Inbox Zero - Label & Reply
+✓ Calendar Management - Arrange meetings
+✓ Google Drive Organization
+
+I have completed VA Quest training with real tasks.
+
+Rate: $5/hr, 20 hrs/week available.
+
+Can we have a quick call tomorrow 2PM?
+
+Best,
+Ailene</div><button class="btn" onclick="navigator.clipboard.writeText(document.querySelector('#toolView.doc').innerText);alert('✅ Copied! Paste mo sa Upwork!')">Copy Template →</button>`; }
+ if(t==='jobs'){ v.innerHTML=`<h3>💼 Job Boards - San maghanap ng client?</h3><div class="tool-item" onclick="window.open('https://www.upwork.com','_blank')"><span>Upwork - Best for beginners</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.onlinejobs.ph','_blank')"><span>OnlineJobs.ph - PH VAs</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.linkedin.com/jobs','_blank')"><span>LinkedIn Jobs</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.fiverr.com','_blank')"><span>Fiverr</span><span>↗</span></div><div class="lesson"><b>San gagamitin?</b><br>• Upwork: Gamitin cover letter template mo<br>• OLJ: Profile + portfolio<br>• Apply 5 jobs per day = Real VA hustle!</div>`; }
+ if(t==='portfolio'){ v.innerHTML=`<h3>🎨 Portfolio Templates - San gagamitin?</h3><p style="font-size:12px;color:#6b7280">Gamitin para may ipakita ka kay client na work mo!</p><div class="tool-item" onclick="window.open('https://www.canva.com/resumes/','_blank')"><span>📄 VA Resume Template (Canva)</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.canva.com/websites/','_blank')"><span>🌐 VA Website Template (Canva)</span><span>↗</span></div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/5l3v2a4o2Xw" allowfullscreen></iframe></div><p style="font-size:11px;text-align:center;color:#6b7280">▶️ How to make VA Portfolio</p>`; }
+ v.scrollIntoView({behavior:'smooth'});
 }
-let eC=0;
-function dropE(ev,l){let i=ev.dataTransfer.getData('i');if(window.ems[i].t===l){document.getElementById(l).appendChild(document.getElementById('e'+i));eC++;document.getElementById('r').innerText=`✅ ${eC}/3 tama!`;if(eC===3)setTimeout(next,700);}else{document.getElementById('r').innerText="❌ Mali! Tip: Meeting=client, Work=invoice, Spam=lotto";}}
-function saveCal(){if(!window.sel||!document.getElementById('mt').value){document.getElementById('r').innerText="❌ Pili date + lagay title";return;}document.getElementById('r').innerText=`✅ Nov ${window.sel} saved! NEXT...`;setTimeout(next,600);}
-function checkD(){if(document.querySelectorAll('#p div.border').length<=1){document.getElementById('r').innerText="✅ Organized! NEXT...";setTimeout(next,600);}}
-function next(){cur++;if(cur>20)cur=20;localStorage.setItem('day',cur);eC=0;renderP();window.scrollTo(0,0);}
-function renderC(){
- let courses=[{k:'email',n:'📧 Email Management - Label, Receive, Arrange Meeting'},{k:'cal',n:'📅 Google Calendar & Meet + Docs'},{k:'drive',n:'📁 Google Drive Organizer'}];
- let h=`<h1 class="font-black text-2xl">Course - Real Lessons</h1><p class="text-xs text-gray-500 mt-1">Click lesson para matuto - may totoong pinapagawa!</p><div class="mt-3 space-y-2">${courses.map(c=>`<div onclick="openL('${c.k}')" class="bg-white rounded-2xl p-4 flex justify-between shadow"><p class="font-bold text-sm">${c.n}</p><span>→</span></div>`).join('')}</div><div id="cv" class="hidden bg-white rounded-2xl p-5 mt-3 shadow"></div>`;
- document.getElementById('c').innerHTML=h;
-}
-function openL(k){
- let d=DATA[k]; let v=document.getElementById('cv'); v.classList.remove('hidden');
- let qs=["Ano unang gawin sa email bago mag-reply?","Saan ilagay meeting request?"]; let os=[["Label muna: Work/Meeting/Spam","Delete lahat"],["Meeting label + Calendar + Google Doc","Spam folder"]]; let idx=Math.floor(Math.random()*2);
- let opts=os[idx].map((x,i)=>({o:x,i})).sort(()=>Math.random()-0.5); let correct=opts.findIndex(x=>x.i===0);
- v.innerHTML=`<button onclick="this.parentElement.classList.add('hidden')" class="text-xs">← Back</button><h2 class="font-black mt-2">${d.title}</h2><p class="text-xs mt-2 bg-yellow-50 p-3 rounded-xl">${d.how}</p><p class="font-bold text-xs mt-3">${qs[idx]}</p>${opts.map((c,i)=>`<button onclick="if(${i}===${correct}){this.innerText='✅ Tama! Balik Program para gawin!';setTimeout(()=>tab('p'),800)}else{this.innerText='❌ Mali, basa ulit lesson!'}" class="w-full text-left border rounded-full px-3 py-2 mt-2 text-xs">${String.fromCharCode(65+i)}. ${c.o}</button>`).join('')}`;
- v.scrollIntoView();
-}
-tab('p');renderP();
-</script></body></html>
+function calcRate(){ const h=parseFloat(document.getElementById('hrs').value)||0; const r=parseFloat(document.getElementById('rate').value)||0; document.getElementById('rateRes').innerHTML=`Weekly: $${h*r} <br>Monthly: $${h*r*4} <br><br>💡 Sabihin kay client: My rate is $${r}/hr, $${h*r*4}/month for ${h}hrs/week`; }
+function filterCourse(cat,el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderCourses(cat)}
+function showPage(p,el){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));el.classList.add('active');}
+renderInbox();renderCourses();
+</script>
+</body>
+</html>
