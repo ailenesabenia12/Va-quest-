@@ -2,151 +2,254 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>VA Quest - Complete with Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VA Quest - 30 Days Real App</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,sans-serif;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
-body{background:#f8f7ff;padding-bottom:90px;color:#1f2937}
-.header{background:linear-gradient(135deg,#6d28d9,#8b5cf6);color:white;padding:14px;position:sticky;top:0;z-index:20}
-.progress{height:5px;background:rgba(255,255,255,0.3);border-radius:10px;margin-top:8px;overflow:hidden}
-.progress-bar{height:100%;background:white;width:5%;transition:0.5s}
-.card{background:white;margin:12px;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
-.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000;margin:10px 0}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
-.task-box{background:#f5f3ff;border:2px dashed #a78bfa;border-radius:12px;padding:12px;margin:10px 0}
-.email{display:flex;gap:10px;align-items:center;border:2px solid #e5e7eb;padding:10px;border-radius:12px;margin:6px 0;background:white}
-.email.selected{border-color:#6d28d9;background:#ede9fe}
-.email.done{border-color:#10b981;background:#ecfdf5;opacity:0.6}
-.label-btn{flex:1;padding:12px;border-radius:12px;border:2px solid;text-align:center;font-weight:800;font-size:11px}
-.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:800;background:#6d28d9;color:white;margin-top:10px}
-.btn:disabled{background:#e5e7eb;color:#9ca3af}
-.btn-green{background:#10b981}
-.quiz-opt{border:2px solid #e5e7eb;padding:12px;border-radius:12px;margin:8px 0;background:white;font-size:13px}
-.quiz-opt.correct{border-color:#10b981;background:#ecfdf5}
-.quiz-opt.wrong{border-color:#ef4444;background:#fef2f2}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:8px 0 18px;border-top:1px solid #e5e7eb;z-index:20}
-.nav{color:#9ca3af;font-size:10px;text-align:center;flex:1}
-.nav.active{color:#6d28d9}
-.page{display:none}.page.active{display:block}
-.chip{padding:6px 12px;border-radius:20px;border:1px solid #e5e7eb;background:white;font-size:11px;display:inline-block;margin:3px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+body{background:#f8f7ff;padding-bottom:90px;color:#1a1a1a}
+.header{background:linear-gradient(135deg,#6d28d9,#8b5cf6);color:white;padding:14px;position:sticky;top:0;z-index:20;border-radius:0 0 18px 18px}
+.prog{height:6px;background:rgba(255,255,255,.3);border-radius:10px;margin-top:8px;overflow:hidden}
+.bar{height:100%;background:#facc15;width:3%;transition:.4s}
+.card{background:white;margin:10px;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.video{position:relative;padding-bottom:56.25%;height:0;background:#000;border-radius:12px;overflow:hidden;margin:10px 0}
+.video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:800;background:#6d28d9;color:white;margin-top:10px}
+.btn-g{background:#10b981}.btn:disabled{background:#e5e7eb;color:#9ca3af}
+.opt{border:2px solid #e5e7eb;padding:11px;border-radius:12px;margin:6px 0;background:white;font-size:13px}
+.opt.ok{border-color:#10b981;background:#ecfdf5}.opt.bad{border-color:#ef4444;background:#fef2f2}
+.chip{padding:6px 12px;border-radius:20px;border:1px solid #e5e7eb;background:white;font-size:11px;margin:3px;display:inline-block}
 .chip.active{background:#1f2937;color:white}
-.lesson{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px;margin:8px 0;font-size:12px;line-height:1.5}
-.doc{border:1px solid #d1d5db;border-radius:8px;padding:10px;min-height:80px;background:white;font-size:13px}
-.cal{display:grid;grid-template-columns:50px 1fr;gap:1px;background:#e5e7eb;border-radius:10px;overflow:hidden;margin-top:8px}
-.t{background:white;padding:10px;font-size:11px}
-.s{background:white;min-height:42px;padding:4px}
-.ev{background:#ede9fe;color:#5b21b6;border-left:4px solid #6d28d9;padding:6px;border-radius:6px;font-size:11px;font-weight:700}
-.tool-item{border:1px solid #e5e7eb;border-radius:12px;padding:14px;margin:8px 0;background:white;display:flex;justify-content:space-between;align-items:center}
-.input{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;margin:6px 0}
+.tool{border:1px solid #e5e7eb;padding:12px;border-radius:12px;margin:7px 0;background:white;display:flex;justify-content:space-between;align-items:center}
+.page{display:none}.page.active{display:block}
+.day-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}
+.day-box{border:2px solid #e5e7eb;padding:8px;border-radius:10px;text-align:center;font-size:11px;font-weight:700;background:white}
+.day-box.done{background:#ecfdf5;border-color:#10b981;color:#065f46}.day-box.active{border-color:#6d28d9;background:#ede9fe;color:#6d28d9}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:8px 0 18px;border-top:1px solid #e5e7eb;z-index:20}
+.nav{font-size:10px;color:#9ca3af;text-align:center;flex:1}.nav.active{color:#6d28d9}
+.input{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;margin:5px 0}
+.lesson{background:#fffbeb;border:1px solid #fde68a;padding:10px;border-radius:10px;font-size:12px;margin:8px 0;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="header">
-<div style="display:flex;justify-content:space-between"><div><div style="font-weight:900">VA QUEST</div><div style="font-size:10px;opacity:0.9">Day 1 + Courses + Tools</div></div><span id="dayBadge" style="background:white;color:#6d28d9;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:800">DAY 1/20</span></div>
-<div class="progress"><div class="progress-bar" id="progBar"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-weight:900;font-size:15px">VA QUEST • 30 DAYS</div><div style="font-size:11px;opacity:.9" id="sub">Day 1: Canva + Docs Tiers</div></div><div id="badge" style="background:white;color:#6d28d9;padding:6px 10px;border-radius:20px;font-size:11px;font-weight:800">DAY 1/30</div></div>
+<div class="prog"><div class="bar" id="bar"></div></div>
 </div>
 
-<!-- PROGRAM -->
-<div id="page-program" class="page active">
+<div id="pg-program" class="page active">
 <div class="card">
-<h3>📧 Day 1: Inbox Zero Hero</h3>
-<div class="video-wrap"><iframe src="https://www.youtube.com/embed/9zJk1u3fP8g" allowfullscreen></iframe></div>
-<div id="s1"><div class="lesson"><b>After video:</b> Label 3 emails!</div><div id="inbox"></div><div style="display:flex;gap:6px;margin-top:8px"><div class="label-btn" style="background:#dbeafe;border-color:#3b82f6;color:#1e40af" onclick="labelNow('work')">📁 WORK</div><div class="label-btn" style="background:#ede9fe;border-color:#8b5cf6;color:#5b21b6" onclick="labelNow('meeting')">📅 MEETING</div><div class="label-btn" style="background:#fee2e2;border-color:#ef4444;color:#991b1b" onclick="labelNow('spam')">🚫 SPAM</div></div><p id="s1t" style="font-size:11px;text-align:center;margin-top:6px;color:#6b7280">Tap email first!</p></div>
-<div id="s2" style="display:none"><div style="font-weight:800">STEP 2: Reply</div><textarea id="reply" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid #d1d5db;height:70px" placeholder="Type reply..."></textarea><button class="btn" onclick="checkReply()">Send →</button></div>
-<div id="s3" style="display:none"><div style="font-weight:800">STEP 3: Google Doc</div><div class="doc" contenteditable="true" id="doc">📄 Agenda: 1. Performance 2. Next Plan 3. Q&A</div><button class="btn" onclick="checkDoc()">Save →</button></div>
-<div id="s4" style="display:none"><div style="font-weight:800">STEP 4: Calendar</div><div class="cal"><div class="t">2PM</div><div class="s" onclick="addCal(this)"><span style="font-size:11px;color:#9ca3af">Tap to add</span></div></div><button class="btn" id="calBtn" disabled onclick="finishDay()">Complete Day 1 →</button></div>
-<div id="done1" style="display:none;text-align:center;padding:20px"><div style="font-size:40px">🎉</div><h3>Day 1 Done!</h3><button class="btn btn-green" onclick="showPage('tools',document.querySelectorAll('.nav')[2])">Go to Tools →</button></div>
+<div class="day-grid" id="days"></div>
+<div id="dayContent"></div>
 </div>
 </div>
 
-<!-- COURSE -->
-<div id="page-course" class="page">
-<div class="card"><h3>🎓 Course Library - With Video</h3><div style="margin:8px 0"><span class="chip active" onclick="filterCourse('all',this)">All</span><span class="chip" onclick="filterCourse('email',this)">Email</span><span class="chip" onclick="filterCourse('calendar',this)">Calendar</span><span class="chip" onclick="filterCourse('drive',this)">Drive</span></div><div id="courseList"></div></div>
-<div class="card" id="lessonBox" style="display:none"></div>
-</div>
-
-<!-- TOOLS - REAL USABLE -->
-<div id="page-tools" class="page">
+<div id="pg-course" class="page">
 <div class="card">
-<h3>🛠️ VA Tools - San Gagamitin</h3>
-<p style="font-size:11px;color:#6b7280">Tap tool para gamitin - Real na magagamit mo pag may client ka na!</p>
-
-<div class="tool-item" onclick="openTool('rate')"><div><div style="font-weight:800">💰 Rate Calculator</div><div style="font-size:11px;color:#6b7280">Compute mo rate per hour / month</div></div><span>→</span></div>
-
-<div class="tool-item" onclick="openTool('invoice')"><div><div style="font-weight:800">🧾 Invoice Generator</div><div style="font-size:11px;color:#6b7280">Gawa ng invoice pag sisingil kay client</div></div><span>→</span></div>
-
-<div class="tool-item" onclick="openTool('cover')"><div><div style="font-weight:800">📄 Cover Letter Template</div><div style="font-size:11px;color:#6b7280">Pang-apply sa Upwork / OLJ</div></div><span>→</span></div>
-
-<div class="tool-item" onclick="openTool('jobs')"><div><div style="font-weight:800">💼 Job Boards</div><div style="font-size:11px;color:#6b7280">San maghanap ng client</div></div><span>→</span></div>
-
-<div class="tool-item" onclick="openTool('portfolio')"><div><div style="font-weight:800">🎨 Portfolio Templates</div><div style="font-size:11px;color:#6b7280">Canva Resume & Website</div></div><span>→</span></div>
+<h3>🎓 All Courses + Video</h3>
+<div id="courseList"></div>
+</div>
+<div class="card" id="courseView" style="display:none"></div>
 </div>
 
+<div id="pg-tools" class="page">
+<div class="card">
+<h3>🛠️ VA Built-in Tools</h3>
+<p style="font-size:11px;color:#6b7280">Tap tool - real na magagamit mo sa client work</p>
+<div class="tool" onclick="openTool('jobs')"><div><b>💼 Job Boards</b><div style="font-size:11px;color:#6b7280">Upwork, Freelancer, PPH, OLJ, LinkedIn, WWR, RemoteOK, FlexJobs</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('career')"><div><b>📈 Career Tracker</b><div style="font-size:11px;color:#6b7280">Track applications & income</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('ai')"><div><b>🤖 AI Tools & Prompts</b><div style="font-size:11px;color:#6b7280">Claude, ChatGPT prompts for VA</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('rate')"><div><b>💰 Rate Calculator</b><div style="font-size:11px;color:#6b7280">Desired income ÷ billable hours</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('timer')"><div><b>⏱️ Focus Timer</b><div style="font-size:11px;color:#6b7280">Pomodoro for VA work</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('tips')"><div><b>💡 Tips & Tricks</b><div style="font-size:11px;color:#6b7280">Boundaries, revisions, conflict</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('cover')"><div><b>📄 Cover Letter Template</b><div style="font-size:11px;color:#6b7280">Upwork / OLJ ready</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('invoice')"><div><b>🧾 Invoice Template</b><div style="font-size:11px;color:#6b7280">Number, due date, services, payment</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('resume')"><div><b>🎨 VA Resume Template (Canva)</b><div style="font-size:11px;color:#6b7280">Link to Canva</div></div><span>→</span></div>
+<div class="tool" onclick="openTool('josie')"><div><b>🤖 Josie - AI Coach</b><div style="font-size:11px;color:#6b7280">Ask for 3 options with trade-offs</div></div><span>→</span></div>
+</div>
 <div class="card" id="toolView" style="display:none"></div>
 </div>
 
-<!-- BADGE -->
-<div id="page-badge" class="page">
-<div class="card" style="text-align:center"><h3>🏅 Badge</h3><p style="font-size:11px;color:#6b7280">Day 1 of 20 - In Progress</p><div style="height:6px;background:#e5e7eb;border-radius:10px;margin:12px 0"><div style="height:100%;background:#6d28d9;width:5%;border-radius:10px"></div></div><button class="btn" onclick="showPage('program',document.querySelectorAll('.nav')[0])">Continue Day 1</button></div>
+<div id="pg-badge" class="page">
+<div class="card" style="text-align:center">
+<h3>🏅 Progress</h3>
+<div id="badgeView"></div>
+</div>
 </div>
 
-<div class="bottom-nav">
+<div class="bottom">
 <div class="nav active" onclick="showPage('program',this)"><div style="font-size:18px">📚</div>Program</div>
-<div class="nav" onclick="showPage('course',this)"><div style="font-size:18px">🎓</div>Course</div>
+<div class="nav" onclick="showPage('course',this)"><div style="font-size:18px">🎓</div>Courses</div>
 <div class="nav" onclick="showPage('tools',this)"><div style="font-size:18px">🛠️</div>Tools</div>
 <div class="nav" onclick="showPage('badge',this)"><div style="font-size:18px">🏅</div>Badge</div>
 </div>
 
 <script>
-let sel=null,done=0;
-const emails=[{id:'sup',from:'supplier@shopee.com',sub:'Invoice #1023 Due',correct:'work'},{id:'cli',from:'client@brand.com',sub:'Meeting Request 2PM',correct:'meeting'},{id:'spa',from:'win@lotto.com',sub:'YOU WON $1000!!!',correct:'spam'}];
-function renderInbox(){let h='';emails.forEach(e=>{h+=`<div class="email" id="e-${e.id}" onclick="selEmail('${e.id}')"><div id="c-${e.id}" style="width:30px;height:30px;border-radius:50%;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center">•</div><div><div style="font-weight:700;font-size:12px">${e.from}</div><div style="font-size:11px;color:#6b7280">${e.sub}</div></div></div>`});document.getElementById('inbox').innerHTML=h;}
-function selEmail(id){document.querySelectorAll('.email').forEach(e=>e.classList.remove('selected'));document.getElementById('e-'+id).classList.add('selected');sel=emails.find(x=>x.id===id)}
-function labelNow(l){if(!sel)return;if(sel.correct===l){document.getElementById('e-'+sel.id).classList.add('done');document.getElementById('c-'+sel.id).innerHTML='✓';document.getElementById('c-'+sel.id).style.background='#10b981';document.getElementById('c-'+sel.id).style.color='white';done++;sel=null;if(done===3){document.getElementById('s1').style.display='none';document.getElementById('s2').style.display='block';document.getElementById('progBar').style.width='30%'}}}
-function checkReply(){document.getElementById('s2').style.display='none';document.getElementById('s3').style.display='block';document.getElementById('progBar').style.width='60%'}
-function checkDoc(){document.getElementById('s3').style.display='none';document.getElementById('s4').style.display='block';document.getElementById('progBar').style.width='80%'}
-function addCal(el){el.innerHTML='<div class="ev">📅 Campaign Review 2PM</div>';document.getElementById('calBtn').disabled=false}
-function finishDay(){document.getElementById('s4').style.display='none';document.getElementById('done1').style.display='block';document.getElementById('progBar').style.width='100%'}
-
-const courses=[
-{cat:'email',title:'Email Management - Real Work',icon:'📧',video:'https://www.youtube.com/embed/9zJk1u3fP8g',content:`<div id="q1"></div>`},
-{cat:'calendar',title:'Google Calendar - Arrange Meeting',icon:'📅',video:'https://www.youtube.com/embed/huagFs1O1_I',content:`<div id="q2"></div>`},
-{cat:'drive',title:'Google Drive & Docs',icon:'📁',video:'https://www.youtube.com/embed/-r0N5a8Jhe0g',content:`<div id="q3"></div>`}
+// 30 DAYS CURRICULUM
+const days = [
+{title:"Canva + Docs - Basic/Standard/Premium",video:"https://www.youtube.com/embed/5l3v2a4o2Xw",lesson:"Turning VA Work into Productized Service: Basic/Standard/Premium tiers in Canva + Docs. One fixed scope, one fixed price. Example: Basic $50 - 5 posts, Standard $100 - 15 posts, Premium $200 - 30 posts + strategy.",tool:"resume",quiz:0},
+{title:"Notion + Stripe/PayPal - Productized Service",video:"https://www.youtube.com/embed/-r0N5a8Jhe0g",lesson:"How to productize: Use Notion for delivery + Stripe/PayPal for payment. Create 1 offer, 1 price. Client buys → auto Notion invite + payment.",tool:"ai",quiz:1},
+{title:"Contract + Google Calendar - Boundaries",video:"https://www.youtube.com/embed/huagFs1O1_I",lesson:"Setting Boundaries: Contract says hours and response times. Google Calendar blocks work hours. Example: Mon-Fri 9AM-5PM PH, response within 4hrs.",tool:"tips",quiz:2},
+{title:"Loom + Docs Comments - Revisions",video:"https://www.youtube.com/embed/o0r5x9r5a3k",lesson:"Handling Revisions: Use Loom to show work + Docs comments. Turn feedback into checklist; cap revisions to 2 in contract.",tool:"tips",quiz:3},
+{title:"Claude - Conflict Resolution",video:"https://www.youtube.com/embed/5oH9xA-3fMc",lesson:"Client angry? Use Claude: Prompt = Draft a calm, professional reply for [situation]. Review, then send. Never reply angry.",tool:"josie",quiz:4},
+{title:"Problem-Solving with Claude",video:"https://www.youtube.com/embed/9zJk1u3fP8g",lesson:"Critical Thinking: Ask Claude for 3 options with trade-offs, then choose. Skill > Tool.",tool:"josie",quiz:5},
+{title:"Adaptability - Notion Learning",video:"https://www.youtube.com/embed/0O2aH4XLbto",lesson:"Learning Agility: Notion tracker - Learn one new tool per week. VA must adapt fast.",tool:"career",quiz:6},
+{title:"Quality Control - Grammarly + Checklist",video:"https://www.youtube.com/embed/Q1L-2v9A1lQ",lesson:"Attention to Detail: Grammarly + checklist. Proofread every deliverable before send.",tool:"ai",quiz:7},
+{title:"Email Management - Real Task",video:"https://www.youtube.com/embed/9zJk1u3fP8g",lesson:"Day 1 Real: Label WORK/MEETING/SPAM, Reply in 2 mins if possible",tool:"jobs",quiz:8},
+{title:"Calendar Mastery",video:"https://www.youtube.com/embed/huagFs1O1_I",lesson:"Check availability → Create event with Meet link → Attach agenda",tool:"rate",quiz:9},
+{title:"Drive Organization",video:"https://www.youtube.com/embed/-r0N5a8Jhe0g",lesson:"/Clients/Brand/01-Meetings, 02-Invoices, 03-Content. No kalat!",tool:"invoice",quiz:10},
+{title:"Zapier - Automation",video:"https://www.youtube.com/embed/R5a7oF1Z1lA",lesson:"Zapier automates tasks between apps. Trigger = event that starts workflow.",tool:"ai",quiz:11},
+{title:"Prompt Engineering",video:"https://www.youtube.com/embed/5oH9xA-3fMc",lesson:"Strong prompt = Role, task, context, format. Not just 'help'.",tool:"ai",quiz:12},
+{title:"Claude Projects",video:"https://www.youtube.com/embed/9zJk1u3fP8g",lesson:"Best feature to keep client files together = Projects in Claude.",tool:"josie",quiz:13},
+{title:"Prompt Chaining",video:"https://www.youtube.com/embed/huagFs1O1_I",lesson:"Feeding one output into the next prompt = chaining. More accurate.",tool:"josie",quiz:14},
+{title:"Client Discovery Call",video:"https://www.youtube.com/embed/5l3v2a4o2Xw",lesson:"On discovery call: Ask about goals and pain points, and listen. 80% listen.",tool:"cover",quiz:15},
+{title:"Onboarding",video:"https://www.youtube.com/embed/-r0N5a8Jhe0g",lesson:"Onboarding = Welcome pack, contract, intake form. Professional!",tool:"resume",quiz:16},
+{title:"Portfolio with No Experience",video:"https://www.youtube.com/embed/5l3v2a4o2Xw",lesson:"No experience? Create sample projects. Don't fake clients.",tool:"resume",quiz:17},
+{title:"Service Packaging",video:"https://www.youtube.com/embed/9zJk1u3fP8g",lesson:"Fixed tiers Basic/Standard/Premium = productized service",tool:"rate",quiz:18},
+{title:"Personal Brand - LinkedIn",video:"https://www.youtube.com/embed/0O2aH4XLbto",lesson:"Best platform for VA brand = LinkedIn. Post tips daily.",tool:"jobs",quiz:19},
+{title:"Client Reporting",video:"https://www.youtube.com/embed/huagFs1O1_I",lesson:"Good report = Results, metrics, next steps. Not long stories.",tool:"invoice",quiz:20},
+{title:"Retainer Clients",video:"https://www.youtube.com/embed/R5a7oF1Z1lA",lesson:"Retainer = ongoing monthly agreement. Stable income!",tool:"rate",quiz:21},
+{title:"AI Use - Draft then Review",video:"https://www.youtube.com/embed/5oH9xA-3fMc",lesson:"Best use of AI = Draft, then human review. Never send unchecked.",tool:"josie",quiz:22},
+{title:"Loom for Updates",video:"https://www.youtube.com/embed/o0r5x9r5a3k",lesson:"Loom = screen-recorded updates and feedback. Faster than typing.",tool:"tips",quiz:23},
+{title:"Reading Job Posts",video:"https://www.youtube.com/embed/9zJk1u3fP8g",lesson:"Find Tasks, tools, red flags. Not only pay.",tool:"jobs",quiz:24},
+{title:"Skills vs Tools",video:"https://www.youtube.com/embed/Q1L-2v9A1lQ",lesson:"Skills, judgment and context matter most. Tools second.",tool:"career",quiz:25},
+{title:"Boundaries - 11PM Texts",video:"https://www.youtube.com/embed/huagFs1O1_I",lesson:"State working hours upfront. Not always reply.",tool:"tips",quiz:26},
+{title:"Invoice Essentials",video:"https://www.youtube.com/embed/-r0N5a8Jhe0g",lesson:"Invoice = Number, due date, services, amount, payment details",tool:"invoice",quiz:27},
+{title:"Password Safety",video:"https://www.youtube.com/embed/0O2aH4XLbto",lesson:"Safest = Password manager + 2FA. Not sticky notes!",tool:"tips",quiz:28},
+{title:"Confidential Data",video:"https://www.youtube.com/embed/5oH9xA-3fMc",lesson:"Never paste confidential client data into AI without permission!",tool:"tips",quiz:29}
 ];
-function renderCourses(f='all'){let h='';courses.forEach((c,i)=>{if(f!=='all'&&c.cat!==f)return;h+=`<div style="border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin:8px 0" onclick="openCourse(${i})"><div style="display:flex;gap:10px"><div style="font-size:22px">${c.icon}</div><div><div style="font-weight:800;font-size:13px">${c.title}</div><div style="font-size:11px;color:#6b7280">▶️ Video + Task + Quiz</div></div></div></div>`});document.getElementById('courseList').innerHTML=h;}
-function openCourse(i){const c=courses[i];const box=document.getElementById('lessonBox');box.style.display='block';box.innerHTML=`<button onclick="this.parentElement.style.display='none'" style="float:right;border:none;background:#f3f4f6;padding:6px 12px;border-radius:20px">✕</button><h3>${c.icon} ${c.title}</h3><div class="video-wrap"><iframe src="${c.video}" allowfullscreen></iframe></div>${c.content}`;box.scrollIntoView({behavior:'smooth'});if(i===0)renderQ('q1',[{q:'Saan i-label ang invoice?',opts:['Spam','WORK','Meeting'],ans:1},{q:'Job offer saan?',opts:['Spam','WORK - opportunity','Trash'],ans:1}]);if(i===1)renderQ('q2',[{q:'Unang step sa meeting?',opts:['Gawa invite','Check availability','Send meme'],ans:1}]);if(i===2)renderQ('q3',[{q:'Saan ilagay invoice?',opts:['Kalat','/02-Invoices','Trash'],ans:1}]);}
-function renderQ(id,qs){const el=document.getElementById(id);let h='<h5>🧠 Quiz - Hindi puro A!</h5>';qs.forEach((q,qi)=>{h+=`<div style="font-weight:700;font-size:12px;margin-top:8px">${qi+1}. ${q.q}</div>`;q.opts.forEach((o,oi)=>{h+=`<div class="quiz-opt" onclick="checkQ(this,${oi===q.ans},'${id}${qi}')">${String.fromCharCode(65+oi)}. ${o}</div>`});h+=`<div id="${id}${qi}" style="font-size:11px"></div>`});el.innerHTML=h;}
-function checkQ(el,ok,fid){el.parentElement.querySelectorAll('.quiz-opt').forEach(e=>e.style.pointerEvents='none');if(ok){el.classList.add('correct');document.getElementById(fid).innerHTML='✅ Tama!'}else{el.classList.add('wrong');document.getElementById(fid).innerHTML='❌ Mali'}}
 
-// TOOLS REAL
+// 30 QUIZ FROM USER
+const quizBank = [
+{q:"A strong prompt includes:",o:["Just 'help'","Role, task, context, format","Emojis","A name only"],a:1,exp:"Role, task, context, format = strong prompt"},
+{q:"Best Claude feature to keep client files and instructions together?",o:["Projects","Settings","Badges","Emoji"],a:0,exp:"Projects keeps files together"},
+{q:"Prompt chaining means:",o:["One long prompt","Feeding one output into the next prompt","Copying prompts","Deleting chats"],a:1,exp:"Chaining = output → next input"},
+{q:"Best way to organize work in Claude?",o:["One chat for all","One Project per client","Delete chats","None"],a:1,exp:"One Project per client"},
+{q:"An AI agent is:",o:["A human","Software that decides and acts toward a goal","A password","An invoice"],a:1,exp:"Agent = software that acts toward goal"},
+{q:"Zapier is used to:",o:["Edit photos","Automate tasks between apps","Track hours","Sign contracts"],a:1,exp:"Zapier automates"},
+{q:"A trigger in automation is:",o:["The event that starts a workflow","A password","A font","A rate"],a:0,exp:"Trigger = event that starts"},
+{q:"Custom GPTs are built in:",o:["Excel","ChatGPT's GPT Builder","Zoom","Canva"],a:1,exp:"GPT Builder"},
+{q:"Client sends an angry message. First step:",o:["Reply fast","Ignore","Pause, then draft a calm reply","Block"],a:2,exp:"Pause, then calm draft"},
+{q:"Rate formula basics:",o:["Guess","Desired income ÷ billable hours","Copy anyone","Lowest price"],a:1,exp:"Income ÷ hours"},
+{q:"Raising rates:",o:["Surprise them","Give notice and explain value","Double overnight","Never"],a:1,exp:"Give notice + value"},
+{q:"Scope creep is fixed by:",o:["Working free","A change request or extra quote","Ghosting","Deleting the contract"],a:1,exp:"Change request"},
+{q:"Best way to limit revisions:",o:["Hope","Put a number in the contract","Skip feedback","Charge nothing"],a:1,exp:"Put number in contract"},
+{q:"Client texts at 11 PM. Best boundary:",o:["Always reply","State working hours upfront","Quit","Ignore forever"],a:1,exp:"State hours upfront"},
+{q:"An invoice should include:",o:["Amount only","Number, due date, services, amount, payment details","Hobbies","Nothing"],a:1,exp:"Full invoice details"},
+{q:"Safest password practice:",o:["Same password","Password manager + 2FA","Sticky notes","Share by chat"],a:1,exp:"Manager + 2FA"},
+{q:"Paste confidential client data into AI without permission?",o:["Yes","No","Only Fridays","Always"],a:1,exp:"No - privacy!"},
+{q:"On a discovery call you should mostly:",o:["Talk","Ask about goals and pain points, and listen","Hard sell","Stay silent"],a:1,exp:"Ask + listen"},
+{q:"Onboarding starts with:",o:["Nothing","Welcome pack, contract, intake form","Invoice only","Random tasks"],a:1,exp:"Welcome pack + contract + intake"},
+{q:"Portfolio with no experience:",o:["Wait","Create sample projects","Fake clients","Skip it"],a:1,exp:"Create samples"},
+{q:"Service packaging means:",o:["Random prices","Fixed tiers (Basic/Standard/Premium)","Hourly only","Free work"],a:1,exp:"Fixed tiers"},
+{q:"A productized service has:",o:["Custom quote each time","Fixed scope and price","No scope","No price"],a:1,exp:"Fixed scope + price"},
+{q:"Best platform for a VA personal brand:",o:["LinkedIn","Calculator","Notes","Clock"],a:0,exp:"LinkedIn"},
+{q:"A good client report has:",o:["Results, metrics, next steps","Long stories","Jokes","Blank page"],a:0,exp:"Results, metrics, next"},
+{q:"A retainer client means:",o:["One-off task","Ongoing monthly agreement","Free trial","Refund"],a:1,exp:"Ongoing monthly"},
+{q:"Best use of AI on client work:",o:["Send unchecked","Draft, then human review","Never use","Hide it always"],a:1,exp:"Draft + review"},
+{q:"If Claude gives a wrong answer:",o:["Send it","Verify and refine the prompt","Quit","Blame the client"],a:1,exp:"Verify + refine"},
+{q:"Loom is used for:",o:["Screen-recorded updates and feedback","Payroll","Tax","Chat only"],a:0,exp:"Loom = screen record"},
+{q:"Good job-post reading means finding:",o:["Tasks, tools, red flags","Only the pay","Only the logo","Nothing"],a:0,exp:"Tasks, tools, red flags"},
+{q:"AI tools vs skills:",o:["Tools matter most","Skills, judgment and context matter most","Neither","Only price"],a:1,exp:"Skills matter most"}
+];
+
+let cur = parseInt(localStorage.getItem('va_cur')||'0');
+let doneDays = JSON.parse(localStorage.getItem('va_done')||'[]');
+
+function renderDays(){
+let h='';for(let i=0;i<30;i++){
+let cls='day-box'; if(doneDays.includes(i)) cls+=' done'; if(i===cur) cls+=' active';
+h+=`<div class="${cls}" onclick="goDay(${i})">${doneDays.includes(i)?'✓':''} Day ${i+1}</div>`;
+}
+document.getElementById('days').innerHTML=h;
+}
+
+function goDay(i){
+cur=i;localStorage.setItem('va_cur',cur);
+let d=days[i]; let q=quizBank[d.quiz];
+document.getElementById('sub').innerText=`Day ${i+1}: ${d.title}`;
+document.getElementById('badge').innerText=`DAY ${i+1}/30`;
+document.getElementById('bar').style.width=`${((i+1)/30*100)}%`;
+document.getElementById('dayContent').innerHTML=`
+<div style="font-size:11px;color:#6d28d9;font-weight:800">DAY ${String(i+1).padStart(2,'0')} / 30</div>
+<h3 style="margin:4px 0">${d.title}</h3>
+<div class="video"><iframe src="${d.video}" allowfullscreen></iframe></div>
+<p style="font-size:11px;color:#6b7280;text-align:center">▶️ Video Lesson - Watch muna!</p>
+<div class="lesson"><b>📚 Teaching:</b> ${d.lesson}</div>
+<div class="tool" onclick="openTool('${d.tool}');showPage('tools',document.querySelectorAll('.nav')[2])"><div><b>🛠️ Tool for this day: ${d.tool}</b><div style="font-size:11px;color:#6b7280">Tap to open in Tools tab</div></div><span>→</span></div>
+<div style="margin-top:12px"><b>🧠 Quiz for Day ${i+1}</b><div style="font-size:12px;margin:6px 0">${q.q}</div>
+${q.o.map((opt,oi)=>`<div class="opt" onclick="checkDay(this,${oi===q.a},${i})">${String.fromCharCode(65+oi)}. ${opt}</div>`).join('')}
+<div id="exp${i}" style="font-size:11px;margin-top:6px;color:#6b7280"></div>
+</div>
+<button class="btn" id="nextBtn" style="display:none" onclick="completeDay(${i})">Complete Day ${i+1} →</button>
+`;
+renderDays();
+}
+
+function checkDay(el,ok,i){
+el.parentElement.querySelectorAll('.opt').forEach(e=>e.style.pointerEvents='none');
+if(ok){el.classList.add('ok');document.getElementById('exp'+i).innerHTML='✅ Tama! '+quizBank[days[i].quiz].exp; document.getElementById('nextBtn').style.display='block';}
+else{el.classList.add('bad');document.getElementById('exp'+i).innerHTML='❌ Mali. Correct: '+quizBank[days[i].quiz].exp; document.getElementById('nextBtn').style.display='block';}
+}
+
+function completeDay(i){
+if(!doneDays.includes(i)){doneDays.push(i);localStorage.setItem('va_done',JSON.stringify(doneDays));}
+if(i<29) goDay(i+1); else alert('🎉 30 Days Complete! You are now VA Ready!');
+renderDays();updateBadge();
+}
+
+function renderCourses(){
+let h='';days.forEach((d,i)=>{
+h+=`<div style="border:1px solid #e5e7eb;padding:12px;border-radius:12px;margin:8px 0;background:white" onclick="goDay(${i});showPage('program',document.querySelectorAll('.nav')[0])"><div style="display:flex;gap:10px"><div style="font-size:20px">🎥</div><div><div style="font-weight:800;font-size:13px">Day ${i+1}: ${d.title}</div><div style="font-size:11px;color:#6b7280">▶️ Video + Tool: ${d.tool} + Quiz</div></div></div></div>`;
+});
+document.getElementById('courseList').innerHTML=h;
+}
+
 function openTool(t){
- const v=document.getElementById('toolView'); v.style.display='block';
- if(t==='rate'){ v.innerHTML=`<h3>💰 Rate Calculator - San gagamitin?</h3><p style="font-size:12px;color:#6b7280">Gamitin pag nagtanong client: Magkano rate mo?</p><div style="margin-top:10px"><label style="font-size:12px">Hours per week:</label><input class="input" id="hrs" type="number" value="20"><label style="font-size:12px">Rate per hour ($):</label><input class="input" id="rate" type="number" value="5"><button class="btn" onclick="calcRate()">Calculate</button><div id="rateRes" style="margin-top:10px;padding:10px;background:#f5f3ff;border-radius:8px;font-weight:700"></div><div class="lesson" style="margin-top:10px">💡 Beginner VA sa PH: $3-$6/hr, Intermediate $7-$12/hr. Gamitin sa Upwork proposal!</div></div>`; }
- if(t==='invoice'){ v.innerHTML=`<h3>🧾 Invoice Generator</h3><p style="font-size:12px;color:#6b7280">San gagamitin? Pag sisingil ka kay client every month!</p><input class="input" placeholder="Client Name: Brand X"><input class="input" placeholder="Work: Email Management + Calendar"><input class="input" placeholder="Amount: $200"><button class="btn" onclick="alert('✅ Invoice Created! Save as PDF at send kay client! Real VA task!')">Generate Invoice →</button><div class="lesson">Real VA: Send invoice every 1st & 15th of month via email + Google Drive link</div>`; }
- if(t==='cover'){ v.innerHTML=`<h3>📄 Cover Letter Template - San gagamitin?</h3><p style="font-size:12px;color:#6b7280">Gamitin pag mag-apply sa Upwork / OnlineJobs.ph</p><div class="doc" contenteditable="true">Hi [Client Name]!
+const v=document.getElementById('toolView');v.style.display='block';
+if(t==='jobs') v.innerHTML=`<h3>💼 Job Boards</h3><p style="font-size:11px;color:#6b7280">Click to apply - san gagamitin pag may skills ka na</p>
+<div class="tool" onclick="window.open('https://www.upwork.com','_blank')"><span>Upwork</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://www.freelancer.com','_blank')"><span>Freelancer.com</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://www.peopleperhour.com','_blank')"><span>PeoplePerHour</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://www.onlinejobs.ph','_blank')"><span>OnlineJobs.ph</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://www.linkedin.com/jobs','_blank')"><span>LinkedIn Jobs</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://weworkremotely.com','_blank')"><span>We Work Remotely</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://remoteok.com','_blank')"><span>Remote OK</span><span>↗</span></div>
+<div class="tool" onclick="window.open('https://www.flexjobs.com','_blank')"><span>FlexJobs</span><span>↗</span></div>`;
+if(t==='career') v.innerHTML=`<h3>📈 Career Tracker</h3><input class="input" id="cJob" placeholder="Job applied: Upwork VA Email"><input class="input" id="cStatus" placeholder="Status: Applied / Interview"><button class="btn" onclick="let arr=JSON.parse(localStorage.getItem('career')||'[]');arr.push({job:cJob.value,status:cStatus.value});localStorage.setItem('career',JSON.stringify(arr));alert('Saved!');showCareer()">Save</button><div id="careerList" style="margin-top:10px"></div>`;
+if(t==='ai') v.innerHTML=`<h3>🤖 AI Tools & Prompts</h3><div class="lesson"><b>Prompt Template:</b> Role: You are [VA for X]<br>Task: [Do Y]<br>Context: [Client is Z]<br>Format: [Bullet + table]</div><div class="tool"><span>Claude Projects - per client files</span></div><div class="tool"><span>ChatGPT Custom GPTs - GPT Builder</span></div><div class="tool"><span>Zapier - Automate between apps</span></div>`;
+if(t==='rate') v.innerHTML=`<h3>💰 Rate Calculator</h3><p style="font-size:11px">Formula: Desired income ÷ billable hours</p><input class="input" id="inc" type="number" placeholder="Desired monthly income $1000" value="1000"><input class="input" id="hrs" type="number" placeholder="Billable hrs/month 80" value="80"><button class="btn" onclick="document.getElementById('rateRes').innerHTML='Your rate: $'+(inc.value/hrs.value).toFixed(2)+'/hr<br>Monthly: $'+inc.value">Calculate</button><div id="rateRes" style="margin-top:10px;background:#f5f3ff;padding:10px;border-radius:8px;font-weight:700"></div>`;
+if(t==='timer') v.innerHTML=`<h3>⏱️ Focus Timer</h3><div style="text-align:center"><div style="font-size:40px;font-weight:900" id="tm">25:00</div><button class="btn" onclick="startTimer()">Start 25min Focus</button><button class="btn" style="background:#e5e7eb;color:#1f2937;margin-top:6px" onclick="clearInterval(window.tInt);document.getElementById('tm').innerText='25:00'">Reset</button></div>`;
+if(t==='tips') v.innerHTML=`<h3>💡 Tips & Tricks</h3><div class="lesson"><b>Boundaries:</b> State hours + response times in contract + Google Calendar block.<br><br><b>Revisions:</b> Loom + Docs comments → checklist; cap at 2 revisions.<br><br><b>Conflict:</b> Pause, draft calm reply with Claude, review, send.<br><br><b>11PM texts:</b> State working hours upfront.</div>`;
+if(t==='cover') v.innerHTML=`<h3>📄 Cover Letter Template</h3><div contenteditable="true" style="border:1px solid #ccc;padding:10px;border-radius:8px;min-height:120px;font-size:12px" id="coverTxt">Hi [Client Name]!
 
-I saw your job post for [VA Task - Email Management]. I can help you with:
+I saw your post for [VA Email/Calendar/Drive]. I can help with:
 
-✓ Inbox Zero - Label & Reply
-✓ Calendar Management - Arrange meetings
-✓ Google Drive Organization
+✓ ${days[cur].title}
+✓ Results, metrics, next steps reporting
+✓ Grammarly + checklist QC
 
-I have completed VA Quest training with real tasks.
+Tools: Notion, Google Workspace, Claude, Loom, Zapier
 
-Rate: $5/hr, 20 hrs/week available.
+Rate: $5/hr - retainer available
+Availability: Mon-Fri 9AM-5PM PHT
 
-Can we have a quick call tomorrow 2PM?
+Portfolio: [Canva link]
 
 Best,
-Ailene</div><button class="btn" onclick="navigator.clipboard.writeText(document.querySelector('#toolView.doc').innerText);alert('✅ Copied! Paste mo sa Upwork!')">Copy Template →</button>`; }
- if(t==='jobs'){ v.innerHTML=`<h3>💼 Job Boards - San maghanap ng client?</h3><div class="tool-item" onclick="window.open('https://www.upwork.com','_blank')"><span>Upwork - Best for beginners</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.onlinejobs.ph','_blank')"><span>OnlineJobs.ph - PH VAs</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.linkedin.com/jobs','_blank')"><span>LinkedIn Jobs</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.fiverr.com','_blank')"><span>Fiverr</span><span>↗</span></div><div class="lesson"><b>San gagamitin?</b><br>• Upwork: Gamitin cover letter template mo<br>• OLJ: Profile + portfolio<br>• Apply 5 jobs per day = Real VA hustle!</div>`; }
- if(t==='portfolio'){ v.innerHTML=`<h3>🎨 Portfolio Templates - San gagamitin?</h3><p style="font-size:12px;color:#6b7280">Gamitin para may ipakita ka kay client na work mo!</p><div class="tool-item" onclick="window.open('https://www.canva.com/resumes/','_blank')"><span>📄 VA Resume Template (Canva)</span><span>↗</span></div><div class="tool-item" onclick="window.open('https://www.canva.com/websites/','_blank')"><span>🌐 VA Website Template (Canva)</span><span>↗</span></div><div class="video-wrap"><iframe src="https://www.youtube.com/embed/5l3v2a4o2Xw" allowfullscreen></iframe></div><p style="font-size:11px;text-align:center;color:#6b7280">▶️ How to make VA Portfolio</p>`; }
- v.scrollIntoView({behavior:'smooth'});
+Ailene</div><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('coverTxt').innerText);alert('Copied!')">Copy Template</button>`;
+if(t==='invoice') v.innerHTML=`<h3>🧾 Invoice Template</h3><p style="font-size:11px">Must include: Number, due date, services, amount, payment details</p><input class="input" placeholder="Invoice #: INV-001"><input class="input" placeholder="Due Date"><input class="input" placeholder="Services: Email + Calendar"><input class="input" placeholder="Amount: $500"><input class="input" placeholder="Payment: PayPal / Stripe"><button class="btn" onclick="alert('✅ Invoice Ready! Save PDF + send to client')">Generate</button>`;
+if(t==='resume') v.innerHTML=`<h3>🎨 VA Resume (Canva)</h3><div class="tool" onclick="window.open('https://www.canva.com/resumes/templates/','_blank')"><span>📄 Canva Resume Templates</span><span>↗</span></div><div class="tool" onclick="window.open('https://www.canva.com/websites/','_blank')"><span>🌐 Canva Website / Portfolio</span><span>↗</span></div><div class="video"><iframe src="https://www.youtube.com/embed/5l3v2a4o2Xw" allowfullscreen></iframe></div>`;
+if(t==='josie') v.innerHTML=`<h3>🤖 Josie - AI Coach</h3><div class="lesson">I am Josie. Ask me: "Client angry, give 3 options with trade-offs" or "How to raise rates?"</div><input class="input" id="josieQ" placeholder="Ask Josie: e.g., Client asks free work?"><button class="btn" onclick="let q=josieQ.value.toLowerCase();let ans='';if(q.includes('angry')||q.includes('conflict')) ans='Option 1: Calm reply + solution (Pro: professional, Con: time). Option 2: Call to clarify (Pro: fast, Con: emotional). Option 3: Pause + Loom (Pro: clear, Con: delay). Best: 1 + 3';else if(q.includes('rate')) ans='Give notice 2 weeks, explain value: Results + metrics + next steps, show portfolio. Formula: Desired income ÷ billable hrs';else ans='3 Options: 1) Quick fix, 2) Process fix, 3) Contract fix. Trade-offs: speed vs quality vs boundaries. Choose based on client value.';document.getElementById('josieA').innerText=ans">Ask Josie</button><div id="josieA" style="margin-top:10px;padding:10px;background:#ede9fe;border-radius:10px;font-size:12px"></div>`;
+v.scrollIntoView({behavior:'smooth'});
+if(t==='career') showCareer();
 }
-function calcRate(){ const h=parseFloat(document.getElementById('hrs').value)||0; const r=parseFloat(document.getElementById('rate').value)||0; document.getElementById('rateRes').innerHTML=`Weekly: $${h*r} <br>Monthly: $${h*r*4} <br><br>💡 Sabihin kay client: My rate is $${r}/hr, $${h*r*4}/month for ${h}hrs/week`; }
-function filterCourse(cat,el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderCourses(cat)}
-function showPage(p,el){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));el.classList.add('active');}
-renderInbox();renderCourses();
+
+function showCareer(){let arr=JSON.parse(localStorage.getItem('career')||'[]');document.getElementById('careerList').innerHTML=arr.map(c=>`<div class="tool"><span>${c.job}</span><span>${c.status}</span></div>`).join('')||'No applications yet';}
+function startTimer(){let s=25*60;clearInterval(window.tInt);window.tInt=setInterval(()=>{s--;let m=Math.floor(s/60);let sec=s%60;document.getElementById('tm').innerText=`${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;if(s<=0){clearInterval(window.tInt);alert('🎉 Focus done! Break 5 mins');}},1000)}
+function showPage(p,el){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('pg-'+p).classList.add('active');document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));if(el) el.classList.add('active'); if(p==='badge') updateBadge();}
+function updateBadge(){document.getElementById('badgeView').innerHTML=`<div style="font-size:50px">🏅</div><h3>${doneDays.length}/30 Days Done</h3><div class="prog" style="background:#e5e7eb;height:8px;margin:10px 0"><div class="bar" style="width:${doneDays.length/30*100}%;background:#6d28d9"></div></div><p style="font-size:11px;color:#6b7280">Completed: ${doneDays.map(d=>d+1).join(', ')||'None'}</p><button class="btn" style="background:#e5e7eb;color:#1f2937;margin-top:10px" onclick="if(confirm('Reset?')){localStorage.clear();location.reload()}">Reset Progress</button>`;}
+
+renderDays();renderCourses();goDay(cur);updateBadge();
 </script>
 </body>
 </html>
