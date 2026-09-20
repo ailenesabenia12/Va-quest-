@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lovemae VA Quest 20 Days</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#FFF9E5] max-w-md mx-auto min-h-screen pb-20 font-sans">
+<div class="bg-[#1E293B] text-white p-5 rounded-b-[30px]">
+<p class="font-black text-sm">LOVEMAE VA QUEST • 20 DAYS REAL WORK</p>
+<div class="flex justify-between mt-2 text-xs"><span id="dayTxt">Day 4/20</span><span id="pct">20%</span></div>
+<div class="w-full bg-white/20 h-1.5 rounded-full mt-1"><div id="bar" class="bg-yellow-400 h-1.5 rounded-full" style="width:20%"></div></div>
+</div>
+<div class="flex bg-white mx-4 mt-3 rounded-full p-1 text-[10px] font-bold justify-between shadow">
+<button onclick="tab('p')" id="tp" class="bg-yellow-400 rounded-full px-4 py-2">Program</button>
+<button onclick="tab('c')" id="tc" class="px-4 py-2">Course</button>
+<button onclick="tab('b')" id="tb" class="px-4 py-2">Badge</button>
+</div>
+<div id="p" class="p-4"></div>
+<div id="c" class="p-4 hidden"></div>
+<div id="b" class="p-4 hidden"><div class="bg-white rounded-2xl p-6 text-center shadow"><h1 class="font-black text-3xl">🏆 Certified VA!</h1><p id="bTxt" class="mt-2 text-sm">Day 4/20 - Lovemae</p><p class="text-xs mt-2">I built a real VA training simulator</p></div></div>
+<script>
+let cur=parseInt(localStorage.getItem('day')||'4');
+const DATA={
+ email:{title:"Email Management", how:"REAL VA FLOW: 1) Receive email 2) LABEL: Work=invoice, Meeting=client wants meet, Spam=lotto 3) Archive spam 4) Reply with template 5) If meeting → add to Calendar + create Google Doc agenda. DRAG MO SA BABA!"},
+ cal:{title:"Google Calendar & Docs", how:"Client: 'Meet tomorrow 2PM?' → 1) Open Google Calendar 2) Click Nov 15 3) Title: Client Call - Brand 2PM 4) Add Meet link: meet.google.com/xxx 5) Invite client 6) Create Google Doc agenda and attach."},
+ drive:{title:"Google Drive Organizer", how:"Pro Structure: /Client_Name/ → 01_Invoices/ 02_ProductPhotos/ 03_MeetingNotes.docx → Share folder with Edit to client. I-organize mo sa baba!"}
+};
+function tab(x){['p','c','b'].forEach(y=>{document.getElementById(y).classList.add('hidden');document.getElementById('t'+y).classList.remove('bg-yellow-400')});document.getElementById(x).classList.remove('hidden');document.getElementById('t'+x).classList.add('bg-yellow-400');if(x==='p')renderP();if(x==='c')renderC();}
+function renderP(){
+ let type=cur<=8?'email':cur<=13?'cal':'drive'; let d=DATA[type];
+ let h=`<p class="text-[10px] text-teal-700 tracking-widest font-bold">DAY ${String(cur).padStart(2,'0')} / 20 • ${d.title.toUpperCase()}</p><h1 class="font-black text-2xl mt-1">${type==='email'?'Inbox Zero Hero!':type==='cal'?'On-Time VA!':'Organized VA!'}</h1><p class="text-xs mt-2 bg-white p-3 rounded-xl shadow">${d.how}</p><div class="bg-white rounded-2xl p-4 mt-4 shadow">`;
+ if(type==='email'){
+  let ems=[{f:"client@brand.com",s:"Meeting tomorrow 2PM? Need agenda",t:"meeting"},{f:"supplier@shopee.com",s:"Invoice #123 Due Today - Shopee",t:"work"},{f:"win@lotto.com",s:"WIN $1000!!! Click now",t:"spam"}].sort(()=>Math.random()-0.5); window.ems=ems;
+  h+=`<p class="font-bold text-xs">👇 REAL TASK: Drag email sa tamang label!</p><div class="mt-2 space-y-2">${ems.map((e,i)=>`<div draggable="true" ondragstart="event.dataTransfer.setData('i',${i})" id="e${i}" class="border p-2 rounded-xl text-xs bg-yellow-50 cursor-move"><b>${e.f}</b><br>${e.s}</div>`).join('')}</div><div class="grid grid-cols-3 gap-2 mt-3">${['work','meeting','spam'].map(l=>`<div ondrop="dropE(event,'${l}')" ondragover="event.preventDefault()" class="border-2 border-dashed rounded-xl p-2 text-center min-h-[60px]"><b class="text-[8px]">${l.toUpperCase()}</b><div id="${l}"></div></div>`).join('')}</div><p id="r" class="text-center font-bold text-xs mt-2"></p>`;
+ }else if(type==='cal'){
+  h+=`<p class="font-bold text-xs">📅 REAL TASK: Click date + type title + Meet link</p><div class="grid grid-cols-7 gap-1 mt-2 text-[10px]">${Array.from({length:30},(_,i)=>`<div onclick="window.sel=${i+1};document.querySelectorAll('.d').forEach(x=>x.classList.remove('bg-yellow-400'));this.classList.add('bg-yellow-400')" class="d border rounded-lg p-2 text-center cursor-pointer">${i+1}</div>`).join('')}</div><input id="mt" placeholder="Ex: Client Call 2PM - meet.google.com/abc" class="w-full border rounded-full px-3 py-2 mt-3 text-xs"><button onclick="saveCal()" class="w-full bg-black text-white rounded-full py-2 mt-2 text-xs font-bold">Save → NEXT DAY</button><p id="r" class="text-center font-bold text-xs mt-2"></p>`;
+ }else{ h+=`<p class="font-bold text-xs">📁 REAL TASK: I-move lahat sa Client folder</p>${["Product_Photo.jpg","Invoice_Oct.pdf","Meeting_Notes.docx"].map(f=>`<div class="border p-2 rounded-full text-xs mt-2 flex justify-between items-center"><span>${f}</span><button onclick="this.parentElement.remove();checkD()" class="bg-black text-white px-3 py-1 rounded-full text-[10px]">Move</button></div>`).join('')}<p id="r" class="text-center font-bold text-xs mt-3"></p>`;}
+ h+=`</div>`; document.getElementById('p').innerHTML=h; document.getElementById('dayTxt').innerText=`Day ${cur}/20`; document.getElementById('bTxt').innerText=`Day ${cur}/20 Completed - Lovemae Delacruz`; document.getElementById('pct').innerText=Math.round(cur/20*100)+'%'; document.getElementById('bar').style.width=cur/20*100+'%';
+}
+let eC=0;
+function dropE(ev,l){let i=ev.dataTransfer.getData('i');if(window.ems[i].t===l){document.getElementById(l).appendChild(document.getElementById('e'+i));eC++;document.getElementById('r').innerText=`✅ ${eC}/3 tama!`;if(eC===3)setTimeout(next,700);}else{document.getElementById('r').innerText="❌ Mali! Tip: Meeting=client, Work=invoice, Spam=lotto";}}
+function saveCal(){if(!window.sel||!document.getElementById('mt').value){document.getElementById('r').innerText="❌ Pili date + lagay title";return;}document.getElementById('r').innerText=`✅ Nov ${window.sel} saved! NEXT...`;setTimeout(next,600);}
+function checkD(){if(document.querySelectorAll('#p div.border').length<=1){document.getElementById('r').innerText="✅ Organized! NEXT...";setTimeout(next,600);}}
+function next(){cur++;if(cur>20)cur=20;localStorage.setItem('day',cur);eC=0;renderP();window.scrollTo(0,0);}
+function renderC(){
+ let courses=[{k:'email',n:'📧 Email Management - Label, Receive, Arrange Meeting'},{k:'cal',n:'📅 Google Calendar & Meet + Docs'},{k:'drive',n:'📁 Google Drive Organizer'}];
+ let h=`<h1 class="font-black text-2xl">Course - Real Lessons</h1><p class="text-xs text-gray-500 mt-1">Click lesson para matuto - may totoong pinapagawa!</p><div class="mt-3 space-y-2">${courses.map(c=>`<div onclick="openL('${c.k}')" class="bg-white rounded-2xl p-4 flex justify-between shadow"><p class="font-bold text-sm">${c.n}</p><span>→</span></div>`).join('')}</div><div id="cv" class="hidden bg-white rounded-2xl p-5 mt-3 shadow"></div>`;
+ document.getElementById('c').innerHTML=h;
+}
+function openL(k){
+ let d=DATA[k]; let v=document.getElementById('cv'); v.classList.remove('hidden');
+ let qs=["Ano unang gawin sa email bago mag-reply?","Saan ilagay meeting request?"]; let os=[["Label muna: Work/Meeting/Spam","Delete lahat"],["Meeting label + Calendar + Google Doc","Spam folder"]]; let idx=Math.floor(Math.random()*2);
+ let opts=os[idx].map((x,i)=>({o:x,i})).sort(()=>Math.random()-0.5); let correct=opts.findIndex(x=>x.i===0);
+ v.innerHTML=`<button onclick="this.parentElement.classList.add('hidden')" class="text-xs">← Back</button><h2 class="font-black mt-2">${d.title}</h2><p class="text-xs mt-2 bg-yellow-50 p-3 rounded-xl">${d.how}</p><p class="font-bold text-xs mt-3">${qs[idx]}</p>${opts.map((c,i)=>`<button onclick="if(${i}===${correct}){this.innerText='✅ Tama! Balik Program para gawin!';setTimeout(()=>tab('p'),800)}else{this.innerText='❌ Mali, basa ulit lesson!'}" class="w-full text-left border rounded-full px-3 py-2 mt-2 text-xs">${String.fromCharCode(65+i)}. ${c.o}</button>`).join('')}`;
+ v.scrollIntoView();
+}
+tab('p');renderP();
+</script></body></html>
